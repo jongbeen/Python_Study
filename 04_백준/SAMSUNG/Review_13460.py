@@ -3,10 +3,10 @@ sys.stdin = open('input_13460.txt','r')
 
 N, M = map(int, input().split())
 B = [list(input()) for _ in range(N)]  # Board
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
 queue = []
-visited = [[[[False] * M for _ in range(N)] for _ in range(M)] for _ in range(N)]
+visited = [[[[False]*M for _ in range(N)] for _ in range(M)] for _ in range(N)]
 
 def pos_init():
     rx, ry, bx, by = 0, 0, 0, 0
@@ -36,6 +36,7 @@ def solve():
         for i in range(4):
             nrx, nry, rcnt = move(rx, ry, dx[i], dy[i])
             nbx, nby, bcnt = move(bx, by, dx[i], dy[i])
+
             if B[nbx][nby] != 'O':
                 if B[nrx][nry] == 'O':
                     print(depth)
@@ -47,9 +48,8 @@ def solve():
                     else:
                         nbx -= dx[i]
                         nby -= dy[i]
-                if not visited[nrx][nry][nbx][nby]:
-                    visited[nrx][nry][nbx][nby] = True
-                    queue.append((nrx, nry, nbx, nby, depth + 1))
-
+            if not visited[nrx][nry][nbx][nby]:
+                visited[nrx][nry][nbx][nbx][nby] = True
+                queue.append((nrx, nry, nbx, nby, depth + 1))
     print(-1)
 solve()
